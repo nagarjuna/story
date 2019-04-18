@@ -4,6 +4,7 @@ node {
       checkout scm
 
     stage 'Install Gems'
+      sh 'ruby -v'
       sh 'bundle install --path vendor/bundle --full-index --verbose'
 
     stage 'Run Unit tests'
