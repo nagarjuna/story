@@ -35,7 +35,7 @@ node {
 def rvmSh(String cmd) {
     def sourceRvm = 'source /var/lib/jenkins/.rvm/scripts/rvm'
     def useRuby = "rvm use --install 2.5.3"
-    sh "${sourceRvm}; ${useRuby}; $cmd"
+    sh "${sourceRvm} && ${useRuby} && $cmd"
 }
 
 def notifyCulpritsOnEveryUnstableBuild() {
