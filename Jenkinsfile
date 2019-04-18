@@ -32,7 +32,7 @@ node {
     throw err
   }
 }
-def rvmSh(String rubyVersion, String cmd) {
+def rvmSh(String cmd) {
     def sourceRvm = 'source /etc/profile.d/rvm.sh'
     def useRuby = "rvm use --install 2.5.3"
     sh "${sourceRvm}; ${useRuby}; $cmd"
