@@ -4,13 +4,13 @@ node {
       checkout scm
 
     stage 'Install Gems'
-      rvmSh 'bundle install --path vendor/bundle --full-index --verbose'
+      sh 'bundle install --path vendor/bundle --full-index --verbose'
 
     stage 'Run Unit tests'
-      rvmSh 'yarn install --check-files --ignore-engines'
+      sh 'yarn install --check-files --ignore-engines'
       // copy the test database.yml into place for running the unit tests...
       // sh 'cp test/database.yml-test config/database.yml'
-      rvmSh 'npm test'
+      sh 'npm test'
 
     if (env.BRANCH_NAME == 'master') {
       stage 'Prepare Build'
@@ -31,11 +31,6 @@ node {
     currentBuild.result = 'FAILURE'
     throw err
   }
-}
-def rvmSh(String cmd) {
-    def sourceRvm = 'source /var/lib/jenkins/.rvm/scripts/rvm'
-    def useRuby = "rvm use --install 2.5.3"
-    sh "${sourceRvm} && ${useRuby} && $cmd"
 }
 
 def notifyCulpritsOnEveryUnstableBuild() {
