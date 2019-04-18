@@ -4,7 +4,7 @@ node {
       checkout scm
 
     stage 'Install Gems'
-      sh '/usr/local/rvm/rubies/ruby-2.5.3/bin/bundle install --path vendor/bundle --full-index --verbose'
+      sh 'bundle install --path vendor/bundle --full-index --verbose'
 
     stage 'Run Unit tests'
       sh 'yarn install --check-files --ignore-engines'
