@@ -4,7 +4,7 @@ node {
       checkout scm
 
     stage 'Install Gems'
-      sh 'source /home/vagrant/.rvm/scripts/rvm'
+      sh 'source /var/lib/jenkins/.rvm/scripts/rvm'
       sh 'bundle install --path vendor/bundle --full-index --verbose'
 
     stage 'Run Unit tests'
