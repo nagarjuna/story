@@ -4,6 +4,7 @@ node {
       checkout scm
 
     stage 'Install Gems'
+      sh 'source /home/vagrant/.rvm/scripts/rvm'
       sh 'bundle install --path vendor/bundle --full-index --verbose'
 
     stage 'Run Unit tests'
@@ -31,6 +32,11 @@ node {
     currentBuild.result = 'FAILURE'
     throw err
   }
+}
+def rvmSh(String rubyVersion, String cmd) {
+    def sourceRvm = 'source ~/.rvm/scripts/rvm'
+    def useRuby = "rvm use --install $rubyVersion"
+    sh "${sourceRvm}; ${useRuby}; $cmd"
 }
 
 def notifyCulpritsOnEveryUnstableBuild() {
