@@ -8,16 +8,16 @@ node {
     }
 
     stage ('Install Gems') {
-      rvmSh 'whoami'
-      rvmSh 'which ruby'
-      rvmSh 'whereis rvm'
-      rvmSh 'which bundle'
-      rvmSh 'bundle install --path vendor/bundle --full-index --verbose'
+      sh 'whoami'
+      sh 'which ruby'
+      sh 'whereis rvm'
+      sh 'which bundle'
+      sh 'bundle install --path vendor/bundle --full-index --verbose'
     }
     stage ('Run Unit tests'){
       sh 'yarn install --check-files --ignore-engines'
-      rvmSh 'RAILS_ENV=test bundle exec rails db:migrate'
-      rvmSh 'npm test'
+      sh 'RAILS_ENV=test bundle exec rails db:migrate'
+      sh 'npm test'
     }
     if (env.BRANCH_NAME == 'master') {
       stage ('Prepare Build') {
