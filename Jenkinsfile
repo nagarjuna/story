@@ -5,6 +5,7 @@ node {
 
     stage 'Install Gems'
       sh 'whoami'
+      sh 'whereis rvm'
       sh 'bundle install --path vendor/bundle --full-index --verbose'
 
     stage 'Run Unit tests'
