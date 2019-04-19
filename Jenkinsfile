@@ -6,9 +6,9 @@ node {
 
     stage ('Install Gems') {
       sh 'whoami'
-      sh 'which ruby'
-      sh 'whereis rvm'
-      sh 'which bundle'
+      rvmSh 'which ruby'
+      rvmSh 'whereis rvm'
+      rvmSh 'which bundle'
       rvmSh 'bundle install --path vendor/bundle --full-index --verbose'
     }
     stage ('Run Unit tests'){
