@@ -18,7 +18,7 @@ node {
       sh 'yarn install --check-files --ignore-engines'
       // copy the test database.yml into place for running the unit tests...
       // sh 'cp test/database.yml-test config/database.yml'
-      sh 'npm test'
+      rvmSh 'npm test'
     }
     if (env.BRANCH_NAME == 'master') {
       stage ('Prepare Build') {
