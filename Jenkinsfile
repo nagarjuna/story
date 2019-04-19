@@ -37,6 +37,7 @@ node {
     throw err
   }
 }
+
 def rvmSh(String cmd) {
     final RVM_HOME = '$PATH:/var/lib/jenkins/.rvm/bin'
 
