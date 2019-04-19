@@ -16,8 +16,7 @@ node {
     }
     stage ('Run Unit tests'){
       sh 'yarn install --check-files --ignore-engines'
-      // copy the test database.yml into place for running the unit tests...
-      // sh 'cp test/database.yml-test config/database.yml'
+      rvmSh 'RAILS_ENV=test bundle exec rails db:migrate'
       rvmSh 'npm test'
     }
     if (env.BRANCH_NAME == 'master') {
