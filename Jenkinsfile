@@ -8,11 +8,11 @@ node {
     }
 
     stage ('Install Gems') {
-      sh 'whoami'
-      sh 'which ruby'
-      sh 'whereis rvm'
-      sh 'which bundle'
-      sh 'bundle install --path vendor/bundle --full-index --verbose'
+      rvmSh 'whoami'
+      rvmSh 'which ruby'
+      rvmSh 'whereis rvm'
+      rvmSh 'which bundle'
+      rvmSh 'bundle install --path vendor/bundle --full-index --verbose'
     }
     stage ('Run Unit tests'){
       sh 'yarn install --check-files --ignore-engines'
@@ -46,7 +46,7 @@ def rvmSh(String cmd) {
 
     def sourceRvm = 'source /var/lib/jenkins/.rvm/scripts/rvm'
     def useRuby = "/var/lib/jenkins/.rvm/bin/rvm use --install 2.5.3"
-    withEnv(["PATH=${env.PATH}:$RVM_HOME", "RVM_HOME=$RVM_HOME"]) {
+    withEnv(["PATH=$PATH:/var/lib/jenkins/.rvm/bin"]) {
       echo "${PATH}"
       sh "${sourceRvm}; ${useRuby}; $cmd"
     }
