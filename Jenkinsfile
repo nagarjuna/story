@@ -39,8 +39,8 @@ node {
   }
 }
 def rvmSh(String cmd) {
-    def sourceRvm = 'source /etc/profile.d/rvm.sh'
-    def useRuby = "/usr/local/rvm use --install 2.5.3"
+    def sourceRvm = 'source /var/lib/jenkins/.rvm/scripts/rvm'
+    def useRuby = "/var/lib/jenkins/.rvm/bin/rvm use --install 2.5.3"
     sh "${sourceRvm}; ${useRuby}; $cmd"
 }
 
