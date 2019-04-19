@@ -1,8 +1,5 @@
 node {
   try {
-    environment {
-        PATH = "$PATH:/var/lib/jenkins/.rvm/bin"
-    }
     stage ('Checkout') {
       checkout scm
     }
