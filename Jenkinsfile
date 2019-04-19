@@ -1,5 +1,8 @@
 node {
   try {
+    environment {
+        PATH = "$PATH:/var/lib/jenkins/.rvm/bin"
+    }
     stage ('Checkout') {
       checkout scm
     }
@@ -44,7 +47,7 @@ def rvmSh(String cmd) {
     def useRuby = "/var/lib/jenkins/.rvm/bin/rvm use --install 2.5.3"
     withEnv(["PATH=$PATH:/var/lib/jenkins/.rvm/bin"]) {
       // echo "${PATH}"
-      sh "$cmd"
+      sh "${sourceRvm}; ${useRuby}; $cmd"
     }
 }
 
