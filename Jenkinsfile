@@ -8,16 +8,16 @@ node {
     }
 
     stage ('Install Gems') {
-      sh 'whoami'
-      sh 'which ruby'
-      sh 'whereis rvm'
-      sh 'which bundle'
-      sh 'bundle install --path vendor/bundle --full-index --verbose'
+      rvmSh 'whoami'
+      rvmSh 'which ruby'
+      rvmSh 'whereis rvm'
+      rvmSh 'which bundle'
+      rvmSh 'bundle install --path vendor/bundle --full-index --verbose'
     }
     stage ('Run Unit tests'){
-      sh 'yarn install --check-files --ignore-engines'
-      sh 'RAILS_ENV=test bundle exec rails db:migrate'
-      sh 'npm test'
+      rvmSh 'yarn install --check-files --ignore-engines'
+      rvmSh 'RAILS_ENV=test bundle exec rails db:migrate'
+      rvmSh 'npm test'
     }
     if (env.BRANCH_NAME == 'master') {
       stage ('Prepare Build') {
@@ -41,13 +41,13 @@ node {
   }
 }
 def rvmSh(String cmd) {
-    final RVM_HOME = '$PATH:/var/lib/jenkins/.rvm/bin'
+    // final RVM_HOME = '$PATH:/var/lib/jenkins/.rvm/bin'
 
-    def sourceRvm = 'source /var/lib/jenkins/.rvm/scripts/rvm'
-    def useRuby = "/var/lib/jenkins/.rvm/bin/rvm use --install 2.5.3"
+    // def sourceRvm = 'source /var/lib/jenkins/.rvm/scripts/rvm'
+    // def useRuby = "/var/lib/jenkins/.rvm/bin/rvm use --install 2.5.3"
     withEnv(["PATH=$PATH:/var/lib/jenkins/.rvm/bin"]) {
-      echo "${PATH}"
-      sh "${sourceRvm}; ${useRuby}; $cmd"
+      // echo "${PATH}"
+      sh "$cmd"
     }
 }
 
