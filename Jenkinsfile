@@ -40,7 +40,7 @@ node {
 }
 def rvmSh(String cmd) {
     final RVM_HOME = '$PATH:$HOME/.rvm/bin'
-    def path = paths.join(':')
+    
     def sourceRvm = 'source /var/lib/jenkins/.rvm/scripts/rvm'
     def useRuby = "/var/lib/jenkins/.rvm/bin/rvm use --install 2.5.3"
     withEnv(["PATH=${env.PATH}:$RVM_HOME", "RVM_HOME=$RVM_HOME"]) {
