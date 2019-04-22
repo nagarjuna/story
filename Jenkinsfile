@@ -5,7 +5,6 @@ node {
       echo "${env}"
       checkout scm
     }
-
     stage ('Install Gems') {
       rvmSh 'whoami'
       rvmSh 'which ruby'
