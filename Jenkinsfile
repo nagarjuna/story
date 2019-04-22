@@ -1,7 +1,7 @@
 node {
   try {
     stage ('Checkout') {
-      echo "${env}"
+      echo "${params}"
       checkout scm
     }
 
