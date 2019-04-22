@@ -2,7 +2,7 @@ describe("Articles Test", function() {
   it("Navigating to Articles", function() {
     cy.visit("/articles")
       .get("h1")
-      .should("have.text", "Articless"); // navigating to user index page
+      .should("have.text", "Articles"); // navigating to user index page
   });
   it('Create article', function() {
     cy.visit('/articles/new') 
