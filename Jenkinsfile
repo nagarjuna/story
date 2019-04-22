@@ -2,7 +2,16 @@ node {
   try {
     stage ('Checkout') {
       echo "${params}"
-      checkout scm
+      if(params != null){
+          checkout ( [$class: 'GitSCM',
+                      branches: [[name: "${params.GITHUB_PR_HEAD_SHA}" ]],
+                      userRemoteConfigs: [[
+                        url: "${params.GITHUB_REPO_GIT_URL}"]]
+                      ])
+      } else {
+        checkout scm
+      }
+      
     }
 
     stage ('Install Gems') {
@@ -17,7 +26,7 @@ node {
       rvmSh 'RAILS_ENV=test bundle exec rails db:migrate'
       rvmSh 'npm test'
     }
-    if (env.BRANCH_NAME == 'master') {
+    if(params == null){
       stage ('Prepare Build') {
         echo 'Compile assets'
         echo 'Compress the build'
