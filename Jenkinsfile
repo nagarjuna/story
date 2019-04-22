@@ -38,6 +38,11 @@ node {
             echo 'Will deploy to Staging'
         }
       }
+      post { 
+        always { 
+          cleanWs()
+        }
+      }
     }
   }
   catch(err) {
