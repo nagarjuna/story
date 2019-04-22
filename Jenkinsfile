@@ -1,7 +1,7 @@
 node {
   try {
     stage ('Checkout') {
-      echo "${params}"
+      echo "${params.GITHUB_PR_SOURCE_BRANCH}"
       checkout scm
     }
 
