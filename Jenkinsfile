@@ -11,7 +11,6 @@ node {
       } else {
         checkout scm
       }
-      
     }
 
     stage ('Install Gems') {
