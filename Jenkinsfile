@@ -1,7 +1,7 @@
 node {
   try {
     stage ('Checkout') {
-      checkout(scm).GIT_COMMIT
+      checkout scm
     }
     stage ('Install Gems') {
       rvmSh 'whoami'
