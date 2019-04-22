@@ -12,7 +12,6 @@ node {
         checkout scm
       }
       
-      
     }
 
     stage ('Install Gems') {
