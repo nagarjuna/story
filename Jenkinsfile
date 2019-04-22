@@ -2,18 +2,9 @@ node {
   try {
     stage ('Checkout') {
       echo "${params}"
-      if(params.GITHUB_PR_HEAD_SHA != null){
-          checkout ( [$class: 'GitSCM',
-                      branches: [[name: "${params.GITHUB_PR_HEAD_SHA}" ]],
-                      userRemoteConfigs: [[
-                        url: "${params.GITHUB_REPO_GIT_URL}"]]
-                      ])
-      } else {
-        checkout scm
-      }
+      echo "${env}"
+      checkout scm
     }
-
-    
 
     stage ('Install Gems') {
       rvmSh 'whoami'
@@ -27,7 +18,7 @@ node {
       rvmSh 'RAILS_ENV=test bundle exec rails db:migrate'
       rvmSh 'npm test'
     }
-    if(params.GITHUB_PR_HEAD_SHA == null){
+    if (env.BRANCH_NAME == 'master') {
       stage ('Prepare Build') {
         echo 'Compile assets'
         echo 'Compress the build'
@@ -38,11 +29,6 @@ node {
         if(deployToStaging) {
           stage 'Deploy to Staging'
             echo 'Will deploy to Staging'
-        }
-      }
-      post { 
-        always { 
-          cleanWs()
         }
       }
     }
