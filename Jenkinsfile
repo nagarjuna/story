@@ -2,7 +2,7 @@ node {
   try {
     stage ('Checkout') {
       echo "${params}"
-      if(params != null){
+      if(params.GITHUB_PR_HEAD_SHA != null){
           checkout ( [$class: 'GitSCM',
                       branches: [[name: "${params.GITHUB_PR_HEAD_SHA}" ]],
                       userRemoteConfigs: [[
@@ -26,7 +26,7 @@ node {
       rvmSh 'RAILS_ENV=test bundle exec rails db:migrate'
       rvmSh 'npm test'
     }
-    if(params == null){
+    if(params.GITHUB_PR_HEAD_SHA == null){
       stage ('Prepare Build') {
         echo 'Compile assets'
         echo 'Compress the build'
