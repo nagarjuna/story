@@ -11,8 +11,6 @@ node {
       rvmSh 'which bundle'
       rvmSh 'bundle install --path vendor/bundle --full-index --verbose'
     }
-
-    
     stage ('Run Unit tests'){
       rvmSh 'yarn install --check-files --ignore-engines'
       rvmSh 'RAILS_ENV=test bundle exec rails db:migrate'
