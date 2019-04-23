@@ -32,6 +32,7 @@ node {
       }
     }
   }
+  
   catch(err) {
     notifyCulpritsOnEveryUnstableBuild()
     currentBuild.result = 'FAILURE'
